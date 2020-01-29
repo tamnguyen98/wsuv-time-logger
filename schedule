@@ -53,22 +53,6 @@
       }
   },
   "Wednesday": {
-      "VCS": 
-      {
-        "start":
-          {
-            "hour": "12",
-            "min": "00",
-            "period": "PM"
-          },
-        "end":
-          {
-            "hour": "5",
-            "min": "30",
-            "period": "PM"
-          },
-        "isWorkStudy": true
-      }
   },
   "Thursday": {
     "VCS":

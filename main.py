@@ -39,16 +39,10 @@ class Bot:
 
         # Click log time
         self.driver.get("https://cougarmanager.it.wsu.edu/breakdown/NewBreakdown.aspx?")
-        # self.driver.find_element_by_xpath()
-        # self.driver.find_element_by_xpath()
-        # self.driver.find_element_by_xpath()
         sleep(2)
     
     # Get Schedule of the day
     def get_schedule(self):
-        print("Ha")
-        start = ["3", "57", "PM"]
-        end = [ "4", "57", "PM"]
 
         content = ''
         with open('schedule', 'r') as file:
@@ -87,8 +81,10 @@ class Bot:
         print(pay_rate)
         self.driver.find_element_by_xpath(pay_rate).click()
         sleep(.5)
+        # Leave this part, it's the last drop down
         self.driver.find_element_by_xpath("//*[@id=\"ContentPane_ddlDutiesQuick\"]/option[2]").click()
         sleep(1)
+        # Submit
         self.driver.find_element_by_xpath("//*[@id=\"ContentPane_btnSaveQuick\"]").click()
 
 
