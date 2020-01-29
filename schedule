@@ -1,125 +1,125 @@
 {
   "Monday": {
-    "HelpDesk": [
+    "HelpDesk": 
       {
-        "start": [
+        "start":
           {
             "hour": "11",
             "min": "00",
             "period": "AM"
-          }
-        ],
-        "end": [
+          },
+        "end":
           {
             "hour": "1",
             "min": "00",
             "period": "PM"
-          }
-        ],
+          },
         "isWorkStudy": true
       }
-    ]
   },
   "Tuesday": {
-    "Labs": [
+    "Labs":
       {
-        "start": [
+        "start":
           {
             "hour": "10",
             "min": "30",
             "period": "AM"
-          }
-        ],
-        "end": [
+          },
+        "end":
           {
             "hour": "2",
             "min": "00",
             "period": "PM"
-          }
-        ],
+          },
         "isWorkStudy": true
       }
-    ],
-    "VCS": [
+    ,
+    "VCS":
       {
-        "start": [
+        "start":
           {
             "hour": "2",
             "min": "30",
             "period": "PM"
-          }
-        ],
-        "end": [
+          },
+        "end":
           {
             "hour": "5",
             "min": "00",
             "period": "PM"
-          }
-        ],
+          },
         "isWorkStudy": true
       }
-    ]
   },
-  "Wednesday": {},
-  "Thursday": {
-    "VCS": [
+  "Wednesday": {
+      "VCS": 
       {
-        "start": [
+        "start":
           {
             "hour": "12",
             "min": "00",
             "period": "PM"
-          }
-        ],
-        "end": [
+          },
+        "end":
           {
             "hour": "5",
             "min": "30",
             "period": "PM"
-          }
-        ],
+          },
         "isWorkStudy": true
       }
-    ]
+  },
+  "Thursday": {
+    "VCS":
+      {
+        "start":
+          {
+            "hour": "12",
+            "min": "00",
+            "period": "PM"
+          },
+        "end":
+          {
+            "hour": "5",
+            "min": "30",
+            "period": "PM"
+          },
+        "isWorkStudy": true
+      }
   },
   "Friday": {
-    "Labs": [
+    "Labs":
       {
-        "start": [
+        "start":
           {
             "hour": "11",
             "min": "30",
             "period": "AM"
-          }
-        ],
-        "end": [
+          },
+        "end":
           {
             "hour": "1",
             "min": "30",
             "period": "PM"
-          }
-        ],
+          },
         "isWorkStudy": true
-      }
-    ],
-    "HelpDesk": [
+      },
+    "HelpDesk":
       {
-        "start": [
+        "start":
           {
             "hour": "3",
             "min": "00",
             "period": "PM"
-          }
-        ],
-        "end": [
+          },
+        "end":
           {
             "hour": "5",
             "min": "00",
             "period": "PM"
-          }
-        ],
+          },
         "isWorkStudy": true
       }
-    ]
   }
 }
