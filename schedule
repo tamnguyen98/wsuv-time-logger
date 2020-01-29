@@ -1,0 +1,125 @@
+{
+  "Monday": {
+    "HelpDesk": [
+      {
+        "start": [
+          {
+            "hour": "11",
+            "min": "00",
+            "period": "AM"
+          }
+        ],
+        "end": [
+          {
+            "hour": "1",
+            "min": "00",
+            "period": "PM"
+          }
+        ],
+        "isWorkStudy": true
+      }
+    ]
+  },
+  "Tuesday": {
+    "Labs": [
+      {
+        "start": [
+          {
+            "hour": "10",
+            "min": "30",
+            "period": "AM"
+          }
+        ],
+        "end": [
+          {
+            "hour": "2",
+            "min": "00",
+            "period": "PM"
+          }
+        ],
+        "isWorkStudy": true
+      }
+    ],
+    "VCS": [
+      {
+        "start": [
+          {
+            "hour": "2",
+            "min": "30",
+            "period": "PM"
+          }
+        ],
+        "end": [
+          {
+            "hour": "5",
+            "min": "00",
+            "period": "PM"
+          }
+        ],
+        "isWorkStudy": true
+      }
+    ]
+  },
+  "Wednesday": {},
+  "Thursday": {
+    "VCS": [
+      {
+        "start": [
+          {
+            "hour": "12",
+            "min": "00",
+            "period": "PM"
+          }
+        ],
+        "end": [
+          {
+            "hour": "5",
+            "min": "30",
+            "period": "PM"
+          }
+        ],
+        "isWorkStudy": true
+      }
+    ]
+  },
+  "Friday": {
+    "Labs": [
+      {
+        "start": [
+          {
+            "hour": "11",
+            "min": "30",
+            "period": "AM"
+          }
+        ],
+        "end": [
+          {
+            "hour": "1",
+            "min": "30",
+            "period": "PM"
+          }
+        ],
+        "isWorkStudy": true
+      }
+    ],
+    "HelpDesk": [
+      {
+        "start": [
+          {
+            "hour": "3",
+            "min": "00",
+            "period": "PM"
+          }
+        ],
+        "end": [
+          {
+            "hour": "5",
+            "min": "00",
+            "period": "PM"
+          }
+        ],
+        "isWorkStudy": true
+      }
+    ]
+  }
+}
