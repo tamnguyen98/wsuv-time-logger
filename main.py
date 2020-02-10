@@ -1,20 +1,20 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+from login_creds import *
 import datetime
 import json
+import platform
 
-# need to download the webdrivers
-# https://sites.google.com/a/chromium.org/chromedriver/downloads
-
-SID = "tam.t.nguyen"
-user_pass = ""
 
 dropdown_sect = {"HelpDesk": "//*[@id=\"ContentPane_ddlLocationsQuick\"]/option[4]",
                 "VCS": "//*[@id=\"ContentPane_ddlLocationsQuick\"]/option[2]",
                 "Labs": "//*[@id=\"ContentPane_ddlLocationsQuick\"]/option[1]"
                 }
 
-                            #  regular                                          Work study
+                            #  regular                                         ,  Work study
 itemID =    {"HelpDesk": ["//*[@id=\"ContentPane_ddlPositionsQuick\"]/option[2]", "//*[@id=\"ContentPane_ddlPositionsQuick\"]/option[8]"],
             "VCS": ["//*[@id=\"ContentPane_ddlPositionsQuick\"]/option[5]", "//*[@id=\"ContentPane_ddlPositionsQuick\"]/option[7]"],
             "Labs": ["//*[@id=\"ContentPane_ddlPositionsQuick\"]/option[3]", "//*[@id=\"ContentPane_ddlPositionsQuick\"]/option[9]"]
@@ -24,9 +24,15 @@ class Bot:
     def __init__(self, user, password):
         self.user = user
         self.password = password
+        self.os = platform.system()
+        print (self.os)
 
     def init_browser(self):
-        self.driver = webdriver.Chrome(executable_path='chromedriver_79.exe')
+        if self.os == "Windows":
+            self.driver = webdriver.Chrome(executable_path='chromedriver.exe')
+        elif self.os == "Darwin": # If mac
+            self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver')
+
         self.driver.get("https://cougarmanager.it.wsu.edu/breakdown/NewBreakdown.aspx")
         sleep(1)
 
@@ -39,7 +45,12 @@ class Bot:
 
         # Click log time
         self.driver.get("https://cougarmanager.it.wsu.edu/breakdown/NewBreakdown.aspx?")
-        sleep(2)
+        try:
+            WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.ID, "ctl00$ContentPane$lblEnterBreakdownTitle"))
+            )
+        except:
+            print("Logging page took >5s")
     
     # Get Schedule of the day
     def get_schedule(self):
@@ -60,9 +71,18 @@ class Bot:
             print(shift)
             print(info['start']['hour'])
             self.fill_time(shift, info)
-            # Contiue here
+            sleep(3)
     
     def fill_time(self, shift, info):
+
+        # Check to see if the page is loaded
+        try:
+            self.driver.find_element_by_xpath("//*[@id=\"ContentPane_txtStartHourQuick\"]")
+        except:
+            print('Reloading page.')
+            self.driver.get("https://cougarmanager.it.wsu.edu/breakdown/NewBreakdown.aspx?")
+            sleep(2)
+
         # Enter Start time
         self.driver.find_element_by_xpath("//*[@id=\"ContentPane_txtStartHourQuick\"]").send_keys(info['start']['hour'])
         self.driver.find_element_by_xpath("//*[@id=\"ContentPane_txtStartMinuteQuick\"]").send_keys(info['start']['min'])
@@ -90,6 +110,6 @@ class Bot:
 
 
 b = Bot(SID, user_pass)
-b.init_browser()
-schedule = b.get_schedule()
-b.process_shifts(schedule)
+# b.init_browser()
+# schedule = b.get_schedule()
+# b.process_shifts(schedule)
