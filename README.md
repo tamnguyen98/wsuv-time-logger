@@ -1,9 +1,9 @@
 # Instructions
-For Mac:
-    -Rename chromedriver_v80_macOS to just chromedriver
-    -move it to /usr/local/bin
-For Windows
-    -Rename your chromedriver executable to just chromedriver
+For Mac:  
+    -Rename chromedriver_v80_macOS to just chromedriver  
+    -move it to /usr/local/bin  
+For Windows  
+    -Rename your chromedriver executable to just chromedriver  
     -Run the chromedriver executable (according to your chrome's version) first *before* you run the script  
 (Or download your version here https://chromedriver.chromium.org/downloads)
 
