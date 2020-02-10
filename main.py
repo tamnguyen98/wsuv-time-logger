@@ -56,7 +56,7 @@ class Bot:
     def get_schedule(self):
 
         content = ''
-        with open('schedule', 'r') as file:
+        with open('schedule.json', 'r') as file:
             content = file.read().replace('\n', '')
 
         self.data = json.loads(content)
@@ -110,6 +110,6 @@ class Bot:
 
 
 b = Bot(SID, user_pass)
-# b.init_browser()
-# schedule = b.get_schedule()
-# b.process_shifts(schedule)
+b.init_browser()
+schedule = b.get_schedule()
+b.process_shifts(schedule)
