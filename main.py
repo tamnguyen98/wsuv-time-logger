@@ -45,12 +45,24 @@ class Bot:
 
         # Click log time
         self.driver.get("https://cougarmanager.it.wsu.edu/breakdown/NewBreakdown.aspx?")
+        if not self.check_if_cssSelector_exist("div#ContentPane_pnlSubmitQuickBreakdown"):
+            print("Not on Time Log page, trying alternative...")
+            try:
+                # self.driver.find_element_by_css_selector("div#repNavigationCategory_pnlNav_3").click()
+                butt = self.driver.find_element_by_css_selector("a#repNavigationCategory_repNavigationPage_3_lnkPageLink_1")
+                self.driver.implicitly_wait(1)
+                butt.click()
+            except ElementNotInteractableException:
+                print("Can't access the time logging page, please manually direct to that page.")
+                input("Press Enter to continue...")
+
+
+    def check_if_cssSelector_exist(self, str):
         try:
-            WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.ID, "ctl00$ContentPane$lblEnterBreakdownTitle"))
-            )
+            val = self.driver.find_element_by_css_selector(str)
         except:
-            print("Logging page took >5s")
+            return None
+        return val
     
     # Get Schedule of the day
     def get_schedule(self):
@@ -64,9 +76,12 @@ class Bot:
     def process_shifts(self, schedule):
         now = datetime.datetime.now()
         day_str = now.strftime("%A")
-        print(day_str)
-
-        today_sched = self.data[day_str]
+    
+        today_sched = self.data.get(day_str)
+        if not today_sched:
+            print(day_str, ": No scheduled shift")
+            return
+        
         for shift, info in today_sched.items():
             print(shift)
             print(info['start']['hour'])
@@ -76,9 +91,7 @@ class Bot:
     def fill_time(self, shift, info):
 
         # Check to see if the page is loaded
-        try:
-            self.driver.find_element_by_xpath("//*[@id=\"ContentPane_txtStartHourQuick\"]")
-        except:
+        if not self.check_if_cssSelector_exist("table#tblHourMinuteQuick"):
             print('Reloading page.')
             self.driver.get("https://cougarmanager.it.wsu.edu/breakdown/NewBreakdown.aspx?")
             sleep(2)
@@ -98,18 +111,33 @@ class Bot:
         # Pick from drop down
         self.driver.find_element_by_xpath(dropdown_sect[shift]).click()
         pay_rate = itemID[shift][1] if info['isWorkStudy'] else itemID[shift][0]
-        print(pay_rate)
         self.driver.find_element_by_xpath(pay_rate).click()
         sleep(.5)
+
         # Leave this part, it's the last drop down
         self.driver.find_element_by_xpath("//*[@id=\"ContentPane_ddlDutiesQuick\"]/option[2]").click()
         sleep(1)
+
         # Submit
         self.driver.find_element_by_xpath("//*[@id=\"ContentPane_btnSaveQuick\"]").click()
 
+    def history(self):
+        card_range = self.check_if_cssSelector_exist("span#ContentPane_lblDateRange1").text
+
+        submitted_time = self.driver.find_elements_by_class_name("timecardheader")
+        if submitted_time:
+            last_event = submitted_time[len(submitted_time)-1]
+            last_day = last_event.text.split(', ')[1].split(' ')[1]
+            current_day = datetime.datetime.today().day
+            print(f'It been {int(current_day)-int(last_day)} since last log.')
 
 
-b = Bot(SID, user_pass)
-b.init_browser()
-schedule = b.get_schedule()
-b.process_shifts(schedule)
+def main():
+    b = Bot(SID, user_pass)
+    b.init_browser()
+    schedule = b.get_schedule()
+    b.process_shifts(schedule)
+    b.history()
+
+if __name__ == "__main__":
+    main()
