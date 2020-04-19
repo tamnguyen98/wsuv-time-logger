@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import ElementNotInteractableException
 from time import sleep
 from login_creds import *
 import datetime
@@ -138,6 +139,6 @@ def main():
     schedule = b.get_schedule()
     b.process_shifts(schedule)
     b.history()
-
+    input("Press Enter to finish and exit.")
 if __name__ == "__main__":
     main()
